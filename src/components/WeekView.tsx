@@ -87,7 +87,10 @@ export const WeekView: React.FC<WeekViewProps> = ({ events, onUpdateEvent }) => 
     
     const target = e.currentTarget as HTMLElement;
     const dayColumn = target.closest('.day-column') as HTMLElement;
-    const dayIndex = Array.from(dayColumn.parentElement!.children).indexOf(dayColumn) - 1;
+    const parent = dayColumn.parentElement;
+    if (!parent) return;
+    
+    const dayIndex = Array.from(parent.children).indexOf(dayColumn) - 1;
 
     setDraggingEventId(event.id);
     setDragState({

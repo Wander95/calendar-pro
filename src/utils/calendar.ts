@@ -10,7 +10,12 @@ export function getTimeSlots(): string[] {
   const slots: string[] = [];
   for (let hour = START_HOUR; hour <= END_HOUR; hour++) {
     const period = hour >= 12 ? 'PM' : 'AM';
-    const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
+    let displayHour = hour;
+    if (hour > 12) {
+      displayHour = hour - 12;
+    } else if (hour === 0) {
+      displayHour = 12;
+    }
     slots.push(`${displayHour} ${period}`);
   }
   return slots;
