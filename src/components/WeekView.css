@@ -1,0 +1,227 @@
+.week-view {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.week-view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  z-index: 10;
+}
+
+.month-year {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.nav-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-button {
+  padding: 8px 16px;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.nav-button:hover {
+  background-color: #e5e7eb;
+}
+
+.nav-button:active {
+  transform: scale(0.98);
+}
+
+.calendar-grid {
+  display: flex;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.time-column {
+  width: 60px;
+  flex-shrink: 0;
+  border-right: 1px solid #e5e7eb;
+  background-color: #fafafa;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+}
+
+.time-header {
+  height: 60px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.time-slot {
+  position: relative;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+  padding-right: 8px;
+  justify-content: flex-end;
+}
+
+.time-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.day-column {
+  flex: 1;
+  min-width: 0;
+  border-right: 1px solid #e5e7eb;
+  background-color: #ffffff;
+}
+
+.day-column.today {
+  background-color: #eff6ff;
+}
+
+.day-header {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px;
+}
+
+.day-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.day-number {
+  font-size: 20px;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 2px;
+}
+
+.day-number.today-number {
+  background-color: #3b82f6;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-events {
+  position: relative;
+}
+
+.event-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  cursor: grab;
+}
+
+.event-wrapper:active {
+  cursor: grabbing;
+}
+
+.max-booking-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #ef4444;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.max-booking-line::before {
+  content: 'Max booking time';
+  position: absolute;
+  right: 8px;
+  top: -20px;
+  font-size: 10px;
+  color: #ef4444;
+  font-weight: 600;
+  background-color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* Scrollbar styling */
+.calendar-grid::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.calendar-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.calendar-grid::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.calendar-grid::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .week-view-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .month-year {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .nav-controls {
+    justify-content: center;
+  }
+
+  .time-column {
+    width: 50px;
+  }
+
+  .time-label {
+    font-size: 10px;
+  }
+
+  .day-name {
+    font-size: 10px;
+  }
+
+  .day-number {
+    font-size: 16px;
+  }
+}
