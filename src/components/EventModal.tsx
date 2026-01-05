@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import type { CalendarEvent } from '../types/calendar';
 import './EventModal.css';
 
@@ -10,27 +10,39 @@ interface EventModalProps {
 }
 
 export const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave }) => {
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const getInitialValues = () => {
+    if (!event) return { title: '', date: '', startTime: '', endTime: '' };
+    
+    const dateStr = event.startTime.toISOString().split('T')[0];
+    const startHours = event.startTime.getHours().toString().padStart(2, '0');
+    const startMinutes = event.startTime.getMinutes().toString().padStart(2, '0');
+    const endHours = event.endTime.getHours().toString().padStart(2, '0');
+    const endMinutes = event.endTime.getMinutes().toString().padStart(2, '0');
+    
+    return {
+      title: event.title,
+      date: dateStr,
+      startTime: `${startHours}:${startMinutes}`,
+      endTime: `${endHours}:${endMinutes}`
+    };
+  };
 
-  useEffect(() => {
-    if (event) {
-      setTitle(event.title);
-      
-      const dateStr = event.startTime.toISOString().split('T')[0];
-      setDate(dateStr);
-      
-      const startHours = event.startTime.getHours().toString().padStart(2, '0');
-      const startMinutes = event.startTime.getMinutes().toString().padStart(2, '0');
-      setStartTime(`${startHours}:${startMinutes}`);
-      
-      const endHours = event.endTime.getHours().toString().padStart(2, '0');
-      const endMinutes = event.endTime.getMinutes().toString().padStart(2, '0');
-      setEndTime(`${endHours}:${endMinutes}`);
+  const initialValues = getInitialValues();
+  const [title, setTitle] = useState(initialValues.title);
+  const [date, setDate] = useState(initialValues.date);
+  const [startTime, setStartTime] = useState(initialValues.startTime);
+  const [endTime, setEndTime] = useState(initialValues.endTime);
+
+  // Reset form when event changes
+  React.useEffect(() => {
+    if (event && isOpen) {
+      const newValues = getInitialValues();
+      setTitle(newValues.title);
+      setDate(newValues.date);
+      setStartTime(newValues.startTime);
+      setEndTime(newValues.endTime);
     }
-  }, [event]);
+  }, [event?.id, isOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!isOpen || !event) return null;
 
