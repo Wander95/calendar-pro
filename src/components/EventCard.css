@@ -1,0 +1,95 @@
+.event-card {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  user-select: none;
+}
+
+.event-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.event-card.dragging {
+  opacity: 0.6;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  cursor: grabbing;
+  z-index: 1000 !important;
+}
+
+.event-card-content {
+  color: white;
+  pointer-events: none;
+}
+
+.event-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event-time {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+
+.event-attendees {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.attendee-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+.attendee-more {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: -8px;
+  border: 2px solid white;
+}
+
+.resize-handle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8px;
+  cursor: ns-resize;
+  z-index: 10;
+}
+
+.resize-handle-top {
+  top: 0;
+}
+
+.resize-handle-bottom {
+  bottom: 0;
+}
+
+.resize-handle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
